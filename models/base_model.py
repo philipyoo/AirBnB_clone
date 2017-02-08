@@ -10,17 +10,18 @@ class BaseModel:
         for i in args:
             if type(i) is dict:
                 self.__dict__ = i
-                break
-        else:
-            if kwargs is not None:
-                new_obj = {}
-                for k, v in kwargs:
-                    new_obj = {k, v}
-                    storage.new(new_obj)
+                storage.new(i)
+#        else:
+#            if kwargs is not None or kwargs != {}:
+#                new_obj = {}
+#                print(kwargs)
+#                for k, v in kwargs:
+#                    new_obj = {k,v}
+#                    storage.new(new_obj)
 
     def save(self):
-        print("entering save")
         self.updated_at = str(datetime.datetime.now())
+        storage.new(self)
         storage.save()
 
     def __str__(self):
