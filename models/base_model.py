@@ -11,16 +11,15 @@ class BaseModel:
             if type(i) is dict:
                 self.__dict__ = i
                 storage.new(i)
-#        else:
-#            if kwargs is not None or kwargs != {}:
-#                new_obj = {}
-#                print(kwargs)
-#                for k, v in kwargs:
-#                    new_obj = {k,v}
-#                    storage.new(new_obj)
+        else:
+            if kwargs is not None or kwargs != {}:
+                for k, v in kwargs:
+                    setattr(self, k, v)
+                storage.new(self)
 
     def save(self):
         self.updated_at = str(datetime.datetime.now())
+        self.__dict__["__class__"] = type(self).__name__
         storage.new(self)
         storage.save()
 
@@ -29,6 +28,5 @@ class BaseModel:
                                      .__name__, self.id, self.__dict__)
 
     def to_json(self):
-        dupe = self.__dict__.copy()
-        dupe["__class__"] = type(self).__name__
-        return dupe
+        self.__dict__["__class__"] = type(self).__name__
+        return self.__dict__
