@@ -3,20 +3,29 @@ import json
 
 
 class FileStorage:
+    __file_path = "file.json"
+    __objects = {}
+
     def __init__(self):
-        self.__file_path = "file.json"
-        self.__objects = {}
+        self.reload()
 
     def all(self):
-        return self.__objects
+        return FileStorage.__objects
 
     def new(self, obj):
-        self.__objects[obj.id] = obj
+        if obj is not None:
+            FileStorage.__objects[obj.id] = obj.__dict__
 
     def save(self):
-        with open(self.file_path(), mode="w", encoding="utf-8") as fd:
-            fd.write(json.dumps(self.all()))
+        with open(FileStorage.__file_path, mode="w", encoding="utf-8") as fd:
+            fd.write(json.dumps(FileStorage.__objects))
 
     def reload(self):
-        with open(self.file_path(), encoding="utf-8") as fd:
-            self.__objects = json.load(fd)
+        try:
+            with open(FileStorage.__file_path, mode="r+", encoding="utf-8") as fd:
+                try:
+                    FileStorage.__objects = json.load(fd)
+                except Exception as e:
+                    print("Error storing json:", e)
+        except Exception:
+            pass
