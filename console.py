@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import cmd
+from models import *
 
 
 class ConsoleShell(cmd.Cmd):
@@ -13,6 +14,15 @@ class ConsoleShell(cmd.Cmd):
         """Ctrl + D to exit program"""
         print("")
         return True
+
+    def do_create(self, args):
+        """Create a new Basemodel"""
+        if len(args) <= 1:
+            print("Usage: create BaseModel")
+
+    def do_show(self, args):
+        pass
+
 
 if __name__ == '__main__':
     ConsoleShell().cmdloop()
