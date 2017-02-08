@@ -11,13 +11,11 @@ class BaseModel:
             if type(i) is dict:
                 self.__dict__ = i
                 storage.new(i)
-#        else:
-#            if kwargs is not None or kwargs != {}:
-#                new_obj = {}
-#                print(kwargs)
-#                for k, v in kwargs:
-#                    new_obj = {k,v}
-#                    storage.new(new_obj)
+        else:
+            if kwargs is not None or kwargs != {}:
+                for k, v in kwargs:
+                    setattr(self, k, v)
+                storage.new(self)
 
     def save(self):
         self.updated_at = str(datetime.datetime.now())
