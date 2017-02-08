@@ -1,11 +1,20 @@
 #!/usr/bin/python3
 import datetime, uuid
-
+from models.engine import FileStorage
+storage=FileStorage()
 
 class BaseModel:
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         self.created_at = str(datetime.datetime.now())
         self.id = str(uuid.uuid4())
+        if type(args[0]) is dict:
+            self.__dict__ = args[0]
+        else:
+            if kwargs is not None:
+                new_obj = {}
+                for k, v in kwargs:
+                    new_obj[k] = v
+                storage.new(new_obj)
 
     def save(self):
         self.updated_at = str(datetime.datetime.now())

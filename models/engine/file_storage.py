@@ -14,9 +14,9 @@ class FileStorage:
         self.__objects[obj.id] = obj
 
     def save(self):
-        with open(self.file_path(), mode="w", encoding="utf-8") as fd:
+        with open(self.__file_path, mode="w+", encoding="utf-8") as fd:
             fd.write(json.dumps(self.all()))
 
     def reload(self):
-        with open(self.file_path(), encoding="utf-8") as fd:
-            self.__objects = json.load(fd)
+        with open(self.__file_path, mode="w+", encoding="utf-8") as fd:
+            self.__objects = json.loads(fd)
