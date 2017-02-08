@@ -7,17 +7,21 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         self.created_at = str(datetime.datetime.now())
         self.id = str(uuid.uuid4())
-        if type(args[0]) is dict:
-            self.__dict__ = args[0]
+        for i in args:
+            if type(i) is dict:
+                self.__dict__ = i
+                break
         else:
             if kwargs is not None:
                 new_obj = {}
                 for k, v in kwargs:
-                    new_obj[k] = v
-                storage.new(new_obj)
+                    new_obj = {k, v}
+                    storage.new(new_obj)
 
     def save(self):
+        print("entering save")
         self.updated_at = str(datetime.datetime.now())
+        storage.save()
 
     def __str__(self):
         return "[{}] ({}) {}".format(type(self)
