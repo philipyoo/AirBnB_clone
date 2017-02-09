@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import json
+from datetime import datetime
 from models import *
 
 
@@ -32,6 +33,10 @@ class FileStorage:
                 temp = json.load(fd)
                 for k in temp.keys():
                     cls = temp[k].pop("__class__", None)
+                    cr_at = temp[k]["created_at"]
+                    cr_at = datetime.strptime(cr_at, "%Y-%m-%d %H:%M:%S.%f")
+                    up_at = temp[k]["updated_at"]
+                    up_at = datetime.strptime(up_at, "%Y-%m-%d %H:%M:%S.%f")
                     FileStorage.__objects[k] = eval(cls)(temp[k])
         except Exception as e:
             pass
