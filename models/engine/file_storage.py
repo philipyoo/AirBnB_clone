@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import json
+from models import *
 
 
 class FileStorage:
@@ -14,18 +15,23 @@ class FileStorage:
 
     def new(self, obj):
         if obj is not None:
-            FileStorage.__objects[obj.id] = obj.__dict__
+            FileStorage.__objects[obj.id] = obj
 
     def save(self):
+        store = {}
+        for k in FileStorage.__objects.keys():
+            store[k] = FileStorage.__objects[k].to_json()
+
         with open(FileStorage.__file_path, mode="w", encoding="utf-8") as fd:
-            fd.write(json.dumps(FileStorage.__objects))
+            fd.write(json.dumps(store))
 
     def reload(self):
         try:
             with open(FileStorage.__file_path, mode="r+", encoding="utf-8") as fd:
-                try:
-                    FileStorage.__objects = json.load(fd)
-                except Exception as e:
-                    print("Error storing json:", e)
-        except Exception:
+                FileStorage.__objects = {}
+                temp = json.load(fd)
+                for k in temp.keys():
+                    cls = temp[k].pop("__class__", None)
+                    FileStorage.__objects[k] = eval(cls)(temp[k])
+        except Exception as e:
             pass
