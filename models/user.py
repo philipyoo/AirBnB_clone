@@ -2,9 +2,9 @@
 from models import *
 
 
-def User(BaseModel):
-    def __init__(self, *args, **kwargs):
-        super(User, self).__init__(self, *args, **kwargs)
+class User(BaseModel):
+    def __init__(self):
+        super().__init__()
         self.email = ""
         self.password = ""
         self.first_name = ""
