@@ -3,6 +3,7 @@ from models import *
 
 class Place(BaseModel):
     def __init__(self, *args, **kwargs):
+        super().__init__()
         self.city_id = ""
         self.user_id = ""
         self.name = ""
