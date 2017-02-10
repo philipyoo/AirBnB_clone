@@ -7,6 +7,11 @@ class ConsoleShell(cmd.Cmd):
     prompt = '(hbnb)'
     storage.reload()
 
+    valid_classes = ["BaseModel", "User", "State", "City", "Amenity", "Place", "Review"]
+
+    def emptyline(self):
+        pass
+
     def do_quit(self, args):
         """Quit command to exit the program"""
         quit()
@@ -22,9 +27,12 @@ class ConsoleShell(cmd.Cmd):
         if len(args) != 1:
             print("Usage: create BaseModel")
         else:
-            new_obj = BaseModel()
-            print(new_obj.id)
-            new_obj.save()
+            if len(args) > 0 and args[0] in ConsoleShell.valid_classes:
+                new_obj = eval(args[0])()
+                print(new_obj.id)
+                new_obj.save()
+            else:
+                print("NOPE")
 
     def do_show(self, args):
         """Usage: show BaseModel 1234-1234-1234"""
@@ -52,7 +60,11 @@ class ConsoleShell(cmd.Cmd):
 
     def do_all(self, args):
         """Usage: all Basemodel or all"""
-        all_objs = storage.all()
+        if args in ConsoleShell.valid_classes:
+            all_objs = {k: v for (k, v) in storage.all().items() if isinstance(v, eval(args))}
+        else:
+            all_objs = storage.all()
+
         for objs_id in all_objs.keys():
             print(all_objs[objs_id])
 
