@@ -38,47 +38,81 @@ class ConsoleShell(cmd.Cmd):
     def do_show(self, args):
         """Usage: show BaseModel 1234-1234-1234"""
         args = args.split()
-        if len(args) != 2:
-            print("Usage: show BaseModel 1234-1234-1234")
+        if len(args) == 0:
+            print("** class name missing **")
+            return
+        if len(args) == 1:
+            print("** instance id missing **")
+            return
+        if args[0] not in self.valid_classes:
+            print("** class doesn't exist **")
             return
         all_objs = storage.all()
         for objs_id in all_objs.keys():
             if objs_id == args[1]:
                 print(all_objs[objs_id])
+                return
+        print("** no instance found **")
 
     def do_destroy(self, args):
         """Usage: destroy BaseModel 1234-1234-1234"""
         args = args.split()
-        if len(args) != 2:
-            print("Usage: destroy BaseModel 1234-1234-1234")
+        if len(args) == 0:
+            print("** class name missing **")
+            return
+        if len(args) == 1:
+            print("** instance id missing **")
+            return
+        if args[0] not in self.valid_classes:
+            print("** class doesn't exist **")
             return
         all_objs = storage.all()
         for objs_id in all_objs.keys():
             if objs_id == args[1]:
                 del all_objs[objs_id]
-                break
-        storage.save()
+                storage.save()
+                return
+        print("** no instance found **")
 
     def do_all(self, args):
         """Usage: all Basemodel or all"""
-        if args in ConsoleShell.valid_classes:
+        if args not in self.valid_classes and len(args) != 0:
+            print("** class doesn't exist **")
+            return
+        elif args in ConsoleShell.valid_classes:
             all_objs = {k: v for (k, v) in storage.all().items() if isinstance(v, eval(args))}
-        else:
+        elif len(args) == 0:
             all_objs = storage.all()
-
+        else:
+            return
         for objs_id in all_objs.keys():
             print(all_objs[objs_id])
 
     def do_update(self, args):
         """Usage: update <class name> <id> <attribute name> <attribute value>"""
         args = args.split()
-        if len(args) != 4:
-            print("Usage: see help for update")
+        if len(args) == 0:
+            print("** class name missing **")
+            return
+        if len(args) == 1:
+            print("** instance id missing **")
+            return
+        if len(args) == 2:
+            print("** attribute name missing **")
+            return
+        if len(args) == 3:
+            print("** value missing **")
+            return
+        if args[0] not in self.valid_classes:
+            print("** class doesn't exist **")
+            return
         all_objs = storage.all()
         for obj_id in all_objs.keys():
             if obj_id == args[1]:
                 setattr(all_objs[obj_id], args[2], args[3])
-        storage.save()
+                storage.save()
+                return
+        print("** no instance found **")
 
     def do_User(self, args):
         self.class_exec('User', args)
