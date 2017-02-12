@@ -7,6 +7,13 @@ The purpose of this project is to recreate the AirBnB site, from the back-end da
 The project is currently in its first phase, where we are creating a command line interpretor to access objects that will store user data. Users can use the console to create objects, update object attributes, remove objects, list all objects, and store and read data from a .json file.
 
 ----------------------------------------
+
+**Authors**
+- **Philip Yoo**, \<philip.yoo@holbertonschool.com>, @philipYoo10
+- **Jianqin Wang**, \<jianqin.wang@holbertonschool.com>, @jianqinwang94
+
+----------------------------------------
+
 In order to begin the console, you can run either 'python3 console.py' or './console.py' in the command line.
 
 Classes that are currently supported include BaseModel, User, City, State, Amenity, Review, and Place.
