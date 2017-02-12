@@ -26,17 +26,35 @@ class Test_Console(unittest.TestCase):
                      'id': 'd3da85f2-499c-43cb-b33d-3d7935bc808c',
                      'created_at': datetime(2017, 2, 11, 23, 48, 34, 339743)}
         self.model = BaseModel(test_args)
-        self.model.save()
 
     def test_quit(self):
         with self.assertRaises(SystemExit):
             self.cli.do_quit(self.cli)
 
-    def test_show(self):
+    def test_show_correct(self):
         with captured_output() as (out, err):
             self.cli.do_show("BaseModel d3da85f2-499c-43cb-b33d-3d7935bc808c")
         output = out.getvalue().strip()
+        self.assertFalse("2017-2-11 23:48:34.339879" in output)
+        self.assertTrue('2017-02-11 23:48:34.339743' in output)
 
+    def test_show_error_no_args(self):
+        with captured_output() as (out, err):
+            self.cli.do_show('')
+        output = out.getvalue().strip()
+        self.assertEqual(output, "** class name missing **")
+
+    def test_show_error_missing_arg(self):
+        with captured_output() as (out, err):
+            self.cli.do_show("BaseModel")
+        output = out.getvalue().strip()
+        self.assertEqual(output, "** instance id missing **")
+
+    def test_show_error_invalid_class(self):
+        with captured_output() as (out, err):
+            self.cli.do_show("Human 1234-5678-9101")
+        output = out.getvalue().strip()
+        self.assertEqual(output, "** class doesn't exist **")
 
     def test_create(self):
         with captured_output() as (out, err):
