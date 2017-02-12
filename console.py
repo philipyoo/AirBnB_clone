@@ -214,13 +214,15 @@ class ConsoleShell(cmd.Cmd):
                 self.do_update(cls_name + ' ' + new_arg)
             elif len(new_arg) == 2:
                 try:
-                    dty = eval(new_arg[1])
+                    dict = eval(new_arg[1])
                 except:
                     return
-                for j in dty.keys():
-                    self.do_update(cls_name + ' ' + new_arg[0][1:-3] + ' ' + str(j) + ' ' + str(dty[j]))
+                for j in dict.keys():
+                    self.do_update(cls_name + ' ' + new_arg[0][1:-3] + ' ' + str(j) + ' ' + str(dict[j]))
+            else:
+                return
         else:
-            print("Not a valid command (yet)")
+            print("Not a valid command")
 
 
 if __name__ == '__main__':
