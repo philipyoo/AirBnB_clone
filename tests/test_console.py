@@ -157,5 +157,18 @@ class Test_Console(unittest.TestCase):
         self.assertTrue("Bay" in output)
         self.assertFalse("Ace" in output)
 
+    def test_update_error_invalid_id(self):
+        with captured_output() as (out, err):
+            self.cli.do_update("BaseModel 123-456-abc name Cat")
+        output = out.getvalue().strip()
+        self.assertEqual(output, "** no instance found **")
+
+    def test_update_error_no_id(self):
+        with captured_output() as (out, err):
+            self.cli.do_update("BaseModel name Cat")
+        output = out.getvalue().strip()
+        print("OUT: ", output)
+        self.assertEqual(output, "** instance id missing **")
+
 if __name__ == "__main__":
     unittest.main()
