@@ -50,6 +50,12 @@ class Test_Console(unittest.TestCase):
         output = out.getvalue().strip()
         self.assertEqual(output, "** instance id missing **")
 
+    def test_show_error_invalid_class(self):
+        with captured_output() as (out, err):
+            self.cli.do_show("Human 1234-5678-9101")
+        output = out.getvalue().strip()
+        self.assertEqual(output, "** class doesn't exist **")
+
     def test_create(self):
         with captured_output() as (out, err):
             self.cli.do_create('')
