@@ -131,5 +131,19 @@ class Test_Console(unittest.TestCase):
         self.assertTrue("f519fb40-1f5c-458b-945c-2ee8eaaf4900" in output)
         self.assertFalse("123-456-abc" in output)
 
+    def test_all_correct_with_class(self):
+        with captured_output() as (out, err):
+            self.cli.do_all("BaseModel")
+        output = out.getvalue().strip()
+        self.assertTrue(len(output) > 0)
+        self.assertTrue("d3da85f2-499c-43cb-b33d-3d7935bc808c" in output)
+
+    def test_all_error_invalid_class(self):
+        with captured_output() as (out, err):
+            self.cli.do_all("Human")
+        output = out.getvalue().strip()
+        self.assertEqual(output, "** class doesn't exist **")
+
+
 if __name__ == "__main__":
     unittest.main()
