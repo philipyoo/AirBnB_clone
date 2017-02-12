@@ -25,7 +25,6 @@ class ConsoleShell(cmd.Cmd):
         """Create a new Basemodel"""
         args = args.split()
         if len(args) != 1:
-            print(args)
             print("Usage: create BaseModel")
         else:
             if len(args) > 0 and args[0] in ConsoleShell.valid_classes:
@@ -44,7 +43,7 @@ class ConsoleShell(cmd.Cmd):
         if len(args) == 1:
             print("** instance id missing **")
             return
-        if args[0] not in self.valid_classes:
+        if args[0] not in ConsoleShell.valid_classes:
             print("** class doesn't exist **")
             return
         all_objs = storage.all()
@@ -63,7 +62,7 @@ class ConsoleShell(cmd.Cmd):
         if len(args) == 1:
             print("** instance id missing **")
             return
-        if args[0] not in self.valid_classes:
+        if args[0] not in ConsoleShell.valid_classes:
             print("** class doesn't exist **")
             return
         all_objs = storage.all()
@@ -76,7 +75,7 @@ class ConsoleShell(cmd.Cmd):
 
     def do_all(self, args):
         """Usage: all Basemodel or all"""
-        if args not in self.valid_classes and len(args) != 0:
+        if args not in ConsoleShell.valid_classes and len(args) != 0:
             print("** class doesn't exist **")
             return
         elif args in ConsoleShell.valid_classes:
@@ -103,7 +102,7 @@ class ConsoleShell(cmd.Cmd):
         if len(args) == 3:
             print("** value missing **")
             return
-        if args[0] not in self.valid_classes:
+        if args[0] not in ConsoleShell.valid_classes:
             print("** class doesn't exist **")
             return
         all_objs = storage.all()
