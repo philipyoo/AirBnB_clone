@@ -57,7 +57,7 @@ class Test_Console(unittest.TestCase):
         output = out.getvalue().strip()
         self.assertEqual(output, "** class doesn't exist **")
 
-    def test_show_error_classname_missing(self):
+    def test_show_error_class_missing(self):
         with captured_output() as (out, err):
             self.cli.do_show("d3da85f2-499c-43cb-b33d-3d7935bc808c")
         output = out.getvalue().strip()
@@ -88,6 +88,30 @@ class Test_Console(unittest.TestCase):
 
         with captured_output() as (out, err):
             self.cli.do_show("BaseModel f519fb40-1f5c-458b-945c-2ee8eaaf4900")
+        output = out.getvalue().strip()
+        self.assertEqual(output, "** no instance found **")
+
+    def test_destroy_error_missing_id(self):
+        with captured_output() as (out, err):
+            self.cli.do_destroy("BaseModel")
+        output = out.getvalue().strip()
+        self.assertEqual(output, "** instance id missing **")
+
+    def test_destroy_error_class_missing(self):
+        with captured_output() as (out, err):
+            self.cli.do_destroy("d3da85f2-499c-43cb-b33d-3d7935bc808c")
+        output = out.getvalue().strip()
+        self.assertEqual(output, "** class name missing **")
+
+    def test_destroy_error_invalid_class(self):
+        with captured_output() as (out, err):
+            self.cli.do_destroy("Human d3da85f2-499c-43cb-b33d-3d7935bc808c")
+        output = out.getvalue().strip()
+        self.assertEqual(output, "** class doesn't exist **")
+
+    def test_destroy_error_invalid_id(self):
+        with captured_output() as (out, err):
+            self.cli.do_destroy("BaseModel f519fb40-1f5c-458b-945c-2ee8eaaf4900")
         output = out.getvalue().strip()
         self.assertEqual(output, "** no instance found **")
 
