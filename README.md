@@ -19,9 +19,9 @@ The console currently supports the following commands:
 - update <class name> <id> <attribute name> <attribute value>, whilch will update an instance attribute of a previously declared object.
 
 Additionally, the console also supports the following command formats:
--<class name>.all(), which will display all instances of the specified class;
--<class name>.count(), whilch will display the number of instances of the specified class;
--<class name>.show(<id>), whilch will display the instance with correct id and class;
--<class name>.destroy(<id>), which will delete the instance with correct id and class;
--<class name>.update(<id>, <attribute name>, <attribute value>), which will update an instance of the given class and id with the new attribute;
--<class name>.update(<id>, <dictionary representation>), which will update an instance of the given class and id with a dictionary of key value pairs that will be new attributes for the objects. 
+- <class name>.all(), which will display all instances of the specified class;
+- <class name>.count(), whilch will display the number of instances of the specified class;
+- <class name>.show(<id>), whilch will display the instance with correct id and class;
+- <class name>.destroy(<id>), which will delete the instance with correct id and class;
+- <class name>.update(<id>, <attribute name>, <attribute value>), which will update an instance of the given class and id with the new attribute;
+- <class name>.update(<id>, <dictionary representation>), which will update an instance of the given class and id with a dictionary of key value pairs that will be new attributes for the objects. 
