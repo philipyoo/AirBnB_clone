@@ -181,5 +181,11 @@ class Test_Console(unittest.TestCase):
         output = out.getvalue().strip()
         self.assertEqual(output, "** class name missing **")
 
+    def test_update_error_missing_value(self):
+        with captured_output() as (out, err):
+            self.cli.do_update("BaseModel d3da85f2-499c-43cb-b33d-3d7935bc808c name")
+        output = out.getvalue().strip()
+        self.assertEqual(output, "** value missing **")
+
 if __name__ == "__main__":
     unittest.main()
