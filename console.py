@@ -33,7 +33,7 @@ class ConsoleShell(cmd.Cmd):
                 print(new_obj.id)
                 new_obj.save()
             else:
-                print("NOPE")
+                return
 
     def do_show(self, args):
         """Usage: show BaseModel 1234-1234-1234"""
