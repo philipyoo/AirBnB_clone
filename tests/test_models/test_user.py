@@ -2,9 +2,9 @@ import unittest
 from datetime import datetime
 from models import *
 
-class Test_BaseModel(unittest.TestCase):
+class Test_UserModel(unittest.TestCase):
     """
-    Test the base model class
+    Test the user model class
     """
 
     def setUp(self):
