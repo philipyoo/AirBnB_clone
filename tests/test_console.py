@@ -28,6 +28,9 @@ class Test_Console(unittest.TestCase):
         self.model = BaseModel(test_args)
         self.model.save()
 
+    def tearDown(self):
+        self.cli.do_destroy("BaseModel d3da85f2-499c-43cb-b33d-3d7935bc808c")
+
     def test_quit(self):
         with self.assertRaises(SystemExit):
             self.cli.do_quit(self.cli)
@@ -115,6 +118,18 @@ class Test_Console(unittest.TestCase):
         output = out.getvalue().strip()
         self.assertEqual(output, "** no instance found **")
 
+    def test_all_correct(self):
+        test_args = {'updated_at': datetime(2017, 2, 12, 00, 31, 53, 331997),
+                     'id': 'f519fb40-1f5c-458b-945c-2ee8eaaf4900',
+                     'created_at': datetime(2017, 2, 12, 00, 31, 53, 331900)}
+        testmodel = BaseModel(test_args)
+        testmodel.save()
+        with captured_output() as (out, err):
+            self.cli.do_all("")
+        output = out.getvalue().strip()
+        self.assertTrue("d3da85f2-499c-43cb-b33d-3d7935bc808c" in output)
+        self.assertTrue("f519fb40-1f5c-458b-945c-2ee8eaaf4900" in output)
+        self.assertFalse("123-456-abc" in output)
 
 if __name__ == "__main__":
     unittest.main()
