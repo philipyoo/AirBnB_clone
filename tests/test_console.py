@@ -167,8 +167,19 @@ class Test_Console(unittest.TestCase):
         with captured_output() as (out, err):
             self.cli.do_update("BaseModel name Cat")
         output = out.getvalue().strip()
-        print("OUT: ", output)
         self.assertEqual(output, "** instance id missing **")
+
+    def test_update_error_invalid_class(self):
+        with captured_output() as (out, err):
+            self.cli.do_update("Human d3da85f2-499c-43cb-b33d-3d7935bc808c name Cat")
+        output = out.getvalue().strip()
+        self.assertEqual(output, "** class doesn't exist **")
+
+    def test_update_error_no_class(self):
+        with captured_output() as (out, err):
+            self.cli.do_update("d3da85f2-499c-43cb-b33d-3d7935bc808c name Cat")
+        output = out.getvalue().strip()
+        self.assertEqual(output, "** class name missing **")
 
 if __name__ == "__main__":
     unittest.main()
