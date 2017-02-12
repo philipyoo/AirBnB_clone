@@ -25,7 +25,6 @@ class ConsoleShell(cmd.Cmd):
         """Create a new Basemodel"""
         args = args.split()
         if len(args) != 1:
-            print(args)
             print("Usage: create BaseModel")
         else:
             if len(args) > 0 and args[0] in ConsoleShell.valid_classes:
