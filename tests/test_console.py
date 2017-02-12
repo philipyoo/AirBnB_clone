@@ -26,6 +26,7 @@ class Test_Console(unittest.TestCase):
                      'id': 'd3da85f2-499c-43cb-b33d-3d7935bc808c',
                      'created_at': datetime(2017, 2, 11, 23, 48, 34, 339743)}
         self.model = BaseModel(test_args)
+        self.model.save()
 
     def test_quit(self):
         with self.assertRaises(SystemExit):
@@ -35,8 +36,8 @@ class Test_Console(unittest.TestCase):
         with captured_output() as (out, err):
             self.cli.do_show("BaseModel d3da85f2-499c-43cb-b33d-3d7935bc808c")
         output = out.getvalue().strip()
-        self.assertFalse("2017-2-11 23:48:34.339879" in output)
-        self.assertTrue('2017-02-11 23:48:34.339743' in output)
+        self.assertFalse("2017, 2, 11, 23, 48, 34, 339879" in output)
+        self.assertTrue('2017, 2, 11, 23, 48, 34, 339743' in output)
 
     def test_show_error_no_args(self):
         with captured_output() as (out, err):
@@ -77,6 +78,18 @@ class Test_Console(unittest.TestCase):
         output2 = out.getvalue().strip()
         self.assertTrue(output in output2)
 
+    def test_destroy_correct(self):
+        test_args = {'updated_at': datetime(2017, 2, 12, 00, 31, 53, 331997),
+                     'id': 'f519fb40-1f5c-458b-945c-2ee8eaaf4900',
+                     'created_at': datetime(2017, 2, 12, 00, 31, 53, 331900)}
+        testmodel = BaseModel(test_args)
+        testmodel.save()
+        self.cli.do_destroy("BaseModel f519fb40-1f5c-458b-945c-2ee8eaaf4900")
+
+        with captured_output() as (out, err):
+            self.cli.do_show("BaseModel f519fb40-1f5c-458b-945c-2ee8eaaf4900")
+        output = out.getvalue().strip()
+        self.assertEqual(output, "** no instance found **")
 
 
 if __name__ == "__main__":
