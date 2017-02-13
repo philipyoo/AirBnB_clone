@@ -2,6 +2,7 @@ import unittest
 from datetime import datetime
 from models import *
 
+
 class Test_BaseModel(unittest.TestCase):
     """
     Test the base model class
@@ -25,8 +26,10 @@ class Test_BaseModel(unittest.TestCase):
 
     def test_reinstantiation(self):
         self.assertIsInstance(self.model2, BaseModel)
-        self.assertEqual(self.model2.id, '46458416-e5d5-4985-aa48-a2b369d03d2a')
-        self.assertEqual(self.model2.created_at, datetime(2017, 2, 10, 2, 6, 55, 258849))
+        self.assertEqual(self.model2.id,
+                         '46458416-e5d5-4985-aa48-a2b369d03d2a')
+        self.assertEqual(self.model2.created_at,
+                         datetime(2017, 2, 10, 2, 6, 55, 258849))
 
     def test_save(self):
         self.assertFalse(hasattr(self.model1, "updated_at"))

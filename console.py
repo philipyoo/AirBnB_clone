@@ -3,11 +3,12 @@ import cmd
 from models import *
 
 
-class ConsoleShell(cmd.Cmd):
+class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb)'
     storage.reload()
 
-    valid_classes = ["BaseModel", "User", "State", "City", "Amenity", "Place", "Review"]
+    valid_classes = ["BaseModel", "User", "State",
+                     "City", "Amenity", "Place", "Review"]
 
     def emptyline(self):
         pass
@@ -27,7 +28,7 @@ class ConsoleShell(cmd.Cmd):
         if len(args) != 1:
             print("Usage: create BaseModel")
         else:
-            if len(args) > 0 and args[0] in ConsoleShell.valid_classes:
+            if len(args) > 0 and args[0] in HBNBCommand.valid_classes:
                 new_obj = eval(args[0])()
                 print(new_obj.id)
                 new_obj.save()
@@ -43,7 +44,7 @@ class ConsoleShell(cmd.Cmd):
         if len(args) == 1:
             print("** instance id missing **")
             return
-        if args[0] not in ConsoleShell.valid_classes:
+        if args[0] not in HBNBCommand.valid_classes:
             print("** class doesn't exist **")
             return
         all_objs = storage.all()
@@ -62,7 +63,7 @@ class ConsoleShell(cmd.Cmd):
         if len(args) == 1:
             print("** instance id missing **")
             return
-        if args[0] not in ConsoleShell.valid_classes:
+        if args[0] not in HBNBCommand.valid_classes:
             print("** class doesn't exist **")
             return
         all_objs = storage.all()
@@ -75,11 +76,12 @@ class ConsoleShell(cmd.Cmd):
 
     def do_all(self, args):
         """Usage: all Basemodel or all"""
-        if args not in ConsoleShell.valid_classes and len(args) != 0:
+        if args not in HBNBCommand.valid_classes and len(args) != 0:
             print("** class doesn't exist **")
             return
-        elif args in ConsoleShell.valid_classes:
-            all_objs = {k: v for (k, v) in storage.all().items() if isinstance(v, eval(args))}
+        elif args in HBNBCommand.valid_classes:
+            all_objs = {k: v for (k, v) in storage.all().items()
+                        if isinstance(v, eval(args))}
         elif len(args) == 0:
             all_objs = storage.all()
         else:
@@ -88,7 +90,7 @@ class ConsoleShell(cmd.Cmd):
             print(all_objs[objs_id])
 
     def do_update(self, args):
-        """Usage: update <class name> <id> <attribute name> <attribute value>"""
+        """Use: update <class name> <id> <attribute name> <attribute value>"""
         args = args.split()
         if len(args) == 0:
             print("** class name missing **")
@@ -102,7 +104,7 @@ class ConsoleShell(cmd.Cmd):
         if len(args) == 3:
             print("** value missing **")
             return
-        if args[0] not in ConsoleShell.valid_classes:
+        if args[0] not in HBNBCommand.valid_classes:
             print("** class doesn't exist **")
             return
         all_objs = storage.all()
@@ -197,7 +199,8 @@ class ConsoleShell(cmd.Cmd):
         elif args[:6] == '.show(':
             self.do_show(cls_name + ' ' + args[7:-2])
         elif args[:8] == ".count()":
-            all_objs = {k: v for (k, v) in storage.all().items() if isinstance(v, eval(cls_name))}
+            all_objs = {k: v for (k, v) in storage.all().items()
+                        if isinstance(v, eval(cls_name))}
             print(len(all_objs))
         elif args[:9] == '.destroy(':
             self.do_destroy(cls_name + ' ' + args[10:-2])
@@ -218,7 +221,8 @@ class ConsoleShell(cmd.Cmd):
                 except:
                     return
                 for j in dict.keys():
-                    self.do_update(cls_name + ' ' + new_arg[0][1:-3] + ' ' + str(j) + ' ' + str(dict[j]))
+                    self.do_update(cls_name + ' ' + new_arg[0][1:-3] + ' ' +
+                                   str(j) + ' ' + str(dict[j]))
             else:
                 return
         else:
@@ -226,4 +230,4 @@ class ConsoleShell(cmd.Cmd):
 
 
 if __name__ == '__main__':
-    ConsoleShell().cmdloop()
+    HBNBCommand().cmdloop()
