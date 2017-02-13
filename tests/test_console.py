@@ -1,8 +1,11 @@
-import unittest, sys, io
+import unittest
+import sys
+import io
 from contextlib import contextmanager
 from models import *
 from datetime import datetime
 from console import ConsoleShell
+
 
 @contextmanager
 def captured_output():
@@ -13,6 +16,7 @@ def captured_output():
         yield sys.stdout, sys.stderr
     finally:
         sys.stdout, sys.stderr = old_out, old_err
+
 
 class Test_Console(unittest.TestCase):
     """
@@ -70,9 +74,6 @@ class Test_Console(unittest.TestCase):
             self.cli.do_show("BaseModel {}".format(output))
         output2 = out.getvalue().strip()
         self.assertTrue(output in output2)
-
-
-
 
 if __name__ == "__main__":
     unittest.main()
