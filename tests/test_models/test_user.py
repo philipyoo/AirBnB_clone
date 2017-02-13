@@ -2,6 +2,7 @@ import unittest
 from datetime import datetime
 from models import *
 
+
 class Test_UserModel(unittest.TestCase):
     """
     Test the user model class
