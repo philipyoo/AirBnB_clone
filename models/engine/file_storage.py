@@ -28,7 +28,8 @@ class FileStorage:
 
     def reload(self):
         try:
-            with open(FileStorage.__file_path, mode="r+", encoding="utf-8") as fd:
+            with open(FileStorage.__file_path,
+                      mode="r+", encoding="utf-8") as fd:
                 FileStorage.__objects = {}
                 temp = json.load(fd)
                 for k in temp.keys():
