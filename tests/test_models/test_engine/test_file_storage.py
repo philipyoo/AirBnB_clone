@@ -48,10 +48,8 @@ class Test_FileStorage(unittest.TestCase):
         b.save()
         self.assertEqual(len(self.store.all()), self.test_len + 2)
 
-
     def test_reload(self):
         pass
-
 
 if __name__ == "__main__":
     unittest.main()
