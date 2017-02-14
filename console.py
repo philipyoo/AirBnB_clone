@@ -68,7 +68,7 @@ class HBNBCommand(cmd.Cmd):
             return
         all_objs = storage.all()
         for objs_id in all_objs.keys():
-            if objs_id == args[1]:
+            if objs_id == args[1] and args[0] in str(type(all_objs[objs_id])):
                 del all_objs[objs_id]
                 storage.save()
                 return
