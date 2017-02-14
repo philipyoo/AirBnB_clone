@@ -2,6 +2,7 @@ import unittest
 from datetime import datetime
 from models import *
 
+
 class Test_CityModel(unittest.TestCase):
     """
     Test the city model class

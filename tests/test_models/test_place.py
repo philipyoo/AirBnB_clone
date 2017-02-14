@@ -2,6 +2,7 @@ import unittest
 from datetime import datetime
 from models import *
 
+
 class Test_PlaceModel(unittest.TestCase):
     """
     Test the place model class

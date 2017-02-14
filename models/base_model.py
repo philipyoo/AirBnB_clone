@@ -27,6 +27,7 @@ class BaseModel:
     def to_json(self):
         dupe = self.__dict__.copy()
         dupe["created_at"] = str(dupe["created_at"])
-        dupe["updated_at"] = str(dupe["updated_at"])
+        if ("updated_at" in dupe):
+            dupe["updated_at"] = str(dupe["updated_at"])
         dupe["__class__"] = type(self).__name__
         return dupe
