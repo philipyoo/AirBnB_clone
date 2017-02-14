@@ -23,7 +23,11 @@ class Test_FileStorage(unittest.TestCase):
         os.remove('file.json')
 
     def test_all(self):
-        pass
+        test_len = 0
+        if os.path.isfile("file.json"):
+            test_len = len(self.store.all())
+
+        self.assertEqual(len(self.store.all()), test_len)
 
     def test_new(self):
         pass
