@@ -4,7 +4,7 @@ import io
 from contextlib import contextmanager
 from models import *
 from datetime import datetime
-from console import ConsoleShell
+from console import HBNBCommand
 
 
 @contextmanager
@@ -24,7 +24,7 @@ class Test_Console(unittest.TestCase):
     """
 
     def setUp(self):
-        self.cli = ConsoleShell()
+        self.cli = HBNBCommand()
 
         test_args = {'updated_at': datetime(2017, 2, 11, 23, 48, 34, 339879),
                      'id': 'd3da85f2-499c-43cb-b33d-3d7935bc808c',
