@@ -18,28 +18,38 @@ class Test_FileStorage(unittest.TestCase):
                      'created_at': datetime(2017, 2, 12, 00, 31, 53, 331900)}
         self.model = BaseModel(test_args)
 
+        self.test_len = 0
+        if os.path.isfile("file.json"):
+            self.test_len = len(self.store.all())
+
     def tearDown(self):
         import os
-        os.remove('file.json')
+        if os.path.isfile("file.json"):
+            os.remove('file.json')
 
     def test_all(self):
-        pass
+        self.assertEqual(len(self.store.all()), self.test_len)
 
     def test_new(self):
-        pass
+        self.assertEqual(len(self.store.all()), self.test_len)
+        self.model.save()
+        self.assertEqual(len(self.store.all()), self.test_len + 1)
+        a = BaseModel()
+        a.save()
+        self.assertEqual(len(self.store.all()), self.test_len + 2)
 
     def test_save(self):
-        test_len = 0
-        if os.path.isfile("file.json"):
-            test_len = len(self.store.all())
-
-        self.assertEqual(len(self.store.all()), test_len)
-        self.model.save()
-        self.assertEqual(len(self.store.all()), test_len + 1)
+        self.test_len = len(self.store.all())
+        a = BaseModel()
+        a.save()
+        self.assertEqual(len(self.store.all()), self.test_len + 1)
+        b = User()
+        self.assertNotEqual(len(self.store.all()), self.test_len + 2)
+        b.save()
+        self.assertEqual(len(self.store.all()), self.test_len + 2)
 
     def test_reload(self):
         pass
-
 
 if __name__ == "__main__":
     unittest.main()
