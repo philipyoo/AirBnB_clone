@@ -26,7 +26,7 @@ class HBNBCommand(cmd.Cmd):
         """Create a new Basemodel"""
         args = args.split()
         if len(args) != 1:
-            print("Usage: create BaseModel")
+            print("** clas name missing **")
         else:
             if len(args) > 0 and args[0] in HBNBCommand.valid_classes:
                 new_obj = eval(args[0])()
