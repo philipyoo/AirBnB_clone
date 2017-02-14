@@ -49,7 +49,7 @@ class HBNBCommand(cmd.Cmd):
             return
         all_objs = storage.all()
         for objs_id in all_objs.keys():
-            if objs_id == args[1]:
+            if objs_id == args[1] and type(all_objs[objs_id]) == args[0]:
                 print(all_objs[objs_id])
                 return
         print("** no instance found **")
