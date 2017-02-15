@@ -1,0 +1,25 @@
+.filters {
+  height: 70px;
+  width: 100%;
+  border: 1px #DDD solid;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.search {
+  background-color: #FF5A5F;
+  height: 48px;
+  width: 20%;
+  float: right;
+  margin-right: 30px;
+  border-radius: 4px;
+  border: 1px #DDD;
+  font-size: 16px;
+  color: white;
+}
+
+button:hover {
+  opacity: 0.9;
+}
