@@ -1,10 +1,8 @@
 footer {
     height: 60px;
     width: 100%;
-    border-bottom: 1px #CCCCCC solid;
-    position: relative;
-    text-align: center;
-    bottom: 0;
-    line-height: 60px;
-    vertical-align: middle;
+    border-top: 1px #CCCCCC solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
