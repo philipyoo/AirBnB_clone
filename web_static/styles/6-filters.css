@@ -12,7 +12,6 @@
   height: 100%;
   float: left;
   text-align: left;
-  display: block;
 }
 
 .locations:before {
@@ -26,7 +25,6 @@
   height: 100%;
   float: left;
   text-align: left;
-  display: inline-block;
   word-wrap: break-word;
   border-right: 1px #DDD solid;
 }
@@ -59,7 +57,8 @@ div h4 {
   border: 1px #DDD solid;
   border-radius: 4px;
   z-index: 1;
-  width: 250px;
+  width: 25%;
+  max-width: 250px;
   padding: 0 30px 30px 30px;
   margin-top: 8px;
 }
