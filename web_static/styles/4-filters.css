@@ -3,9 +3,7 @@
   width: 100%;
   border: 1px #DDD solid;
   border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
+  padding: 10px 0;
 }
 
 .search {
