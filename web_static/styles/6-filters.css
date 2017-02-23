@@ -1,0 +1,104 @@
+.filters {
+  height: 70px;
+  width: 100%;
+  border: 1px #DDD solid;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.locations {
+  border-right: 1px #DDD solid;
+  width: 25%;
+  height: 100%;
+  float: left;
+  text-align: left;
+}
+
+.locations:before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.amenities {
+  width: 25%;
+  height: 100%;
+  float: left;
+  text-align: left;
+  word-wrap: break-word;
+  border-right: 1px #DDD solid;
+}
+
+.amenities:before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+}
+
+div h3 {
+  font-weight: 600;
+  margin: 0;
+  padding-bottom: 5px;
+  padding-left: 50px;
+}
+
+div h4 {
+  font-weight: 400;
+  font-size: 14px;
+  margin: 0;
+  padding-left: 50px;
+  padding-bottom: 3px;
+}
+
+.popover {
+  display: none;
+  position: absolute;
+  background-color: #FAFAFA;
+  border: 1px #DDD solid;
+  border-radius: 4px;
+  z-index: 1;
+  width: 25%;
+  max-width: 250px;
+  padding: 0 30px 30px 30px;
+  margin-top: 8px;
+}
+
+.popover h2 {
+  padding-top: 10px;
+  margin-bottom: 5px;
+}
+
+.locations:hover .popover {
+  display: block;
+}
+
+.amenities:hover .popover {
+  display: block;
+  padding-top: 30px;
+}
+
+.sublist {
+  padding-left: 20px;
+}
+
+li {
+  list-style-type: none;
+  padding: 4px;
+}
+
+.search {
+  background-color: #FF5A5F;
+  height: 48px;
+  width: 20%;
+  float: right;
+  margin-right: 30px;
+  border-radius: 4px;
+  border: 1px #DDD;
+  font-size: 16px;
+  color: white;
+  margin-top: 10px;
+}
+
+button:hover {
+  opacity: 0.9;
+}
