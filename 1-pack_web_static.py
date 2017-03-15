@@ -3,6 +3,7 @@
 from fabric.api import local
 import datetime
 
+
 def do_pack():
     local('mkdir -p versions')
     timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
