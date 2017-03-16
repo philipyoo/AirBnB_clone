@@ -9,8 +9,8 @@ env.hosts = ['75.101.171.13', '54.174.68.191']
 def do_deploy(archive_path):
     file_name = archive_path.split("/")[-1]
     file_without = file_name.split(".")[0]
-    if not isfile(archive_path):
-        return False
+#    if not isfile(archive_path):
+#        return False
 
     put(archive_path, "/tmp/%s" % file_name)
     run("mkdir -p /data/web_static/releases/%s" % file_without)
@@ -20,8 +20,8 @@ def do_deploy(archive_path):
     run("""mv /data/web_static/releases/%s/web_static/*
     /data/web_static/releases/%s""" % (file_without, file_without))
     run("rm -rf /data/web_static/releases/%s/web_static" % file_without)
-    run("rm -rf /data/web_static/current")
-    run("ln -s /data/web_static/releases/%s/ /data/web_static_current"
+#    run("rm -rf /data/web_static/current")
+    run("ln -sf /data/web_static/releases/%s/ /data/web_static_current"
         % file_without)
 
     return True
