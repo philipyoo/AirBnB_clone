@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-
 from fabric.api import local, put, run, env
 import datetime
 
@@ -35,10 +34,10 @@ def do_deploy(archive_path):
 
 def deploy():
     path = do_pack()
-    if (path == nil):
+    if (path == None):
         return False
     try:
         local('ls versions/%s' % path)
-    except Exception:
+    except:
         return False
     return do_deploy(path)
