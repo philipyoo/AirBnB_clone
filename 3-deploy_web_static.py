@@ -34,7 +34,7 @@ def do_deploy(archive_path):
 
 def deploy():
     path = do_pack()
-    if (path == None):
+    if (path is None or path is nil):
         return False
     try:
         local('ls versions/%s' % path)
