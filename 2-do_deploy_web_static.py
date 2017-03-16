@@ -17,7 +17,8 @@ def do_deploy(archive_path):
         run("sudo rm /tmp/%s" % file_name)
         run("sudo mv %s/web_static/* %s/" % (dirname, dirname))
         run("sudo rm -rf %s/web_static" % dirname)
-        run("sudo ln -sf %s/ /data/web_static/current" % dirname)
+        run("rm -rf /data/web_static/current")
+        run("sudo ln -s %s/ /data/web_static/current" % dirname)
         return True
     except Exception:
         return False
