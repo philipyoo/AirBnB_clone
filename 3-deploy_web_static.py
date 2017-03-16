@@ -13,6 +13,7 @@ def do_pack():
     local('tar -cvzf "%s" ./web_static' % filename)
     return filename
 
+
 def do_deploy(archive_path):
     try:
         file_name = archive_path.split("/")[-1]
@@ -31,8 +32,13 @@ def do_deploy(archive_path):
     except Exception:
         return False
 
+
 def deploy():
     path = do_pack()
     if (path == nil):
+        return False
+    try:
+        local('ls versions/%s' % path)
+    except Exception:
         return False
     return do_deploy(path)
