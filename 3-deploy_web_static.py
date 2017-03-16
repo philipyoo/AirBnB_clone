@@ -34,10 +34,12 @@ def do_deploy(archive_path):
 
 def deploy():
     path = do_pack()
-    if (path is None or path is nil):
+    if (path is None):
         return False
+
     try:
-        local('ls versions/%s' % path)
+        local('ls %s' % path)
     except:
         return False
+
     return do_deploy(path)
