@@ -12,16 +12,16 @@ def do_deploy(archive_path):
 #    if not isfile(archive_path):
 #        return False
 
-    put(archive_path, "/tmp/%s" % file_name)
-    run("mkdir -p /data/web_static/releases/%s" % file_without)
-    run("tar -xzf /tmp/%s -C /data/web_static/releases/%s/"
+    put(archive_path, "/tmp/")
+    run("sudo mkdir -p /data/web_static/releases/%s" % file_without)
+    run("sudo tar -xzf /tmp/%s -C /data/web_static/releases/%s/"
         % (file_name, file_without))
-    run("rm /tmp/%s" % file_name)
-    run("""mv /data/web_static/releases/%s/web_static/*
+    run("sudo rm /tmp/%s" % file_name)
+    run("""sudo mv /data/web_static/releases/%s/web_static/*
     /data/web_static/releases/%s""" % (file_without, file_without))
-    run("rm -rf /data/web_static/releases/%s/web_static" % file_without)
+    run("sudo rm -rf /data/web_static/releases/%s/web_static" % file_without)
 #    run("rm -rf /data/web_static/current")
-    run("ln -sf /data/web_static/releases/%s/ /data/web_static_current"
+    run("sudo ln -sf /data/web_static/releases/%s/ /data/web_static_current"
         % file_without)
 
     return True
